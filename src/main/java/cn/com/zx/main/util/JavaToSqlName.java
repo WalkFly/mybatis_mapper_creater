@@ -8,10 +8,13 @@ public class JavaToSqlName {
         int j = 0;
         for(int i = 0 ; i < chars.length ; i ++){
             //判断是否是大写
-            if(chars[i] >= 65 && chars[i] <= 90 ){
-                //若是大写，则先截取该部分字符,并转换为小写
-                result.append(className.substring(j ,i).toLowerCase()).append("_");
-                j =i;
+            //排除第一次大写导致直接插入_
+            if(i != 0){
+                if(chars[i] >= 65 && chars[i] <= 90 ){
+                    //若是大写，则先截取该部分字符,并转换为小写
+                    result.append(className.substring(j ,i).toLowerCase()).append("_");
+                    j =i;
+                }
             }
         }
         //拼接最后一部分和无大写的情况（）
@@ -33,7 +36,7 @@ public class JavaToSqlName {
             return "TIMESTAMP";
         }
         if(javaType.equals("Boolean")){
-            return "TINYINT";
+            return "BOOLEAN";
         }
         if(javaType.equals("Long")){
             return "BIGINT";

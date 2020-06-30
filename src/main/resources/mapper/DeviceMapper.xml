@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.com.soyea.diotmp.sync.dao.primary.DeviceDao">
+  <sql id="table">device</sql>
+  <resultMap id="DeviceMap" type="Device">
+    <id column="id" property="id" jdbcType="BIGINT"/>
+    <result column="modified_time" property="modifiedTime" jdbcType="TIMESTAMP"/>
+    <result column="device_cur_fm_version" property="deviceCurFmVersion" jdbcType="VARCHAR"/>
+    <result column="remark" property="remark" jdbcType="VARCHAR"/>
+    <result column="device_parent_id" property="deviceParentId" jdbcType="BIGINT"/>
+    <result column="device_name" property="deviceName" jdbcType="VARCHAR"/>
+    <result column="virtual_device_flag" property="virtualDeviceFlag" jdbcType="BOOLEAN"/>
+    <result column="device_signal_indicator" property="deviceSignalIndicator" jdbcType="INTEGER"/>
+    <result column="valid_state" property="validState" jdbcType="TINYINT"/>
+    <result column="device_signal_pci" property="deviceSignalPci" jdbcType="INTEGER"/>
+    <result column="last_communicate_time" property="lastCommunicateTime" jdbcType="TIMESTAMP"/>
+    <result column="device_remove_time" property="deviceRemoveTime" jdbcType="TIMESTAMP"/>
+    <result column="modified_by" property="modifiedBy" jdbcType="VARCHAR"/>
+    <result column="device_cur_hw_version" property="deviceCurHwVersion" jdbcType="VARCHAR"/>
+    <result column="device_mac_addr" property="deviceMacAddr" jdbcType="VARCHAR"/>
+    <result column="device_cur_sw_version" property="deviceCurSwVersion" jdbcType="VARCHAR"/>
+    <result column="device_signal_ecl" property="deviceSignalEcl" jdbcType="TINYINT"/>
+    <result column="device_uuid" property="deviceUuid" jdbcType="VARCHAR"/>
+    <result column="device_tx_power" property="deviceTxPower" jdbcType="SMALLINT"/>
+    <result column="product_id" property="productId" jdbcType="BIGINT"/>
+    <result column="device_online_state" property="deviceOnlineState" jdbcType="TINYINT"/>
+    <result column="device_key" property="deviceKey" jdbcType="VARCHAR"/>
+    <result column="device_timezone" property="deviceTimezone" jdbcType="SMALLINT"/>
+    <result column="device_upgrade_state" property="deviceUpgradeState" jdbcType="TINYINT"/>
+    <result column="device_signal_power" property="deviceSignalPower" jdbcType="SMALLINT"/>
+    <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+    <result column="device_imei" property="deviceImei" jdbcType="VARCHAR"/>
+    <result column="device_register_time" property="deviceRegisterTime" jdbcType="TIMESTAMP"/>
+    <result column="device_heartbeat_cycle" property="deviceHeartbeatCycle" jdbcType="INTEGER"/>
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    <result column="device_signal_snr" property="deviceSignalSnr" jdbcType="SMALLINT"/>
+    <result column="device_link_quality" property="deviceLinkQuality" jdbcType="INTEGER"/>
+    <result column="device_model" property="deviceModel" jdbcType="VARCHAR"/>
+    <result column="device_imsi" property="deviceImsi" jdbcType="VARCHAR"/>
+    <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    <result column="modified_by" property="modifiedBy" jdbcType="VARCHAR"/>
+    <result column="modified_time" property="modifiedTime" jdbcType="TIMESTAMP"/>
+    <result column="remark" property="remark" jdbcType="VARCHAR"/>
+    <result column="valid_state" property="validState" jdbcType="TINYINT"/>
+  </resultMap>
+  <sql id="select_condition_sql">
+    <if test="modifiedTime != null ">and modified_time=#{modifiedTime,jdbcType=TIMESTAMP}</if>
+    <if test="deviceCurFmVersion != null and deviceCurFmVersion != ''">and device_cur_fm_version=#{deviceCurFmVersion,jdbcType=VARCHAR}</if>
+    <if test="remark != null and remark != ''">and remark=#{remark,jdbcType=VARCHAR}</if>
+    <if test="deviceParentId != null ">and device_parent_id=#{deviceParentId,jdbcType=BIGINT}</if>
+    <if test="deviceName != null and deviceName != ''">and device_name=#{deviceName,jdbcType=VARCHAR}</if>
+    <if test="virtualDeviceFlag != null ">and virtual_device_flag=#{virtualDeviceFlag,jdbcType=BOOLEAN}</if>
+    <if test="deviceSignalIndicator != null ">and device_signal_indicator=#{deviceSignalIndicator,jdbcType=INTEGER}</if>
+    <if test="validState != null ">and valid_state=#{validState,jdbcType=TINYINT}</if>
+    <if test="deviceSignalPci != null ">and device_signal_pci=#{deviceSignalPci,jdbcType=INTEGER}</if>
+    <if test="lastCommunicateTime != null ">and last_communicate_time=#{lastCommunicateTime,jdbcType=TIMESTAMP}</if>
+    <if test="deviceRemoveTime != null ">and device_remove_time=#{deviceRemoveTime,jdbcType=TIMESTAMP}</if>
+    <if test="modifiedBy != null and modifiedBy != ''">and modified_by=#{modifiedBy,jdbcType=VARCHAR}</if>
+    <if test="id != null ">and id=#{id,jdbcType=BIGINT}</if>
+    <if test="deviceCurHwVersion != null and deviceCurHwVersion != ''">and device_cur_hw_version=#{deviceCurHwVersion,jdbcType=VARCHAR}</if>
+    <if test="deviceMacAddr != null and deviceMacAddr != ''">and device_mac_addr=#{deviceMacAddr,jdbcType=VARCHAR}</if>
+    <if test="deviceCurSwVersion != null and deviceCurSwVersion != ''">and device_cur_sw_version=#{deviceCurSwVersion,jdbcType=VARCHAR}</if>
+    <if test="deviceSignalEcl != null ">and device_signal_ecl=#{deviceSignalEcl,jdbcType=TINYINT}</if>
+    <if test="deviceUuid != null and deviceUuid != ''">and device_uuid=#{deviceUuid,jdbcType=VARCHAR}</if>
+    <if test="deviceTxPower != null ">and device_tx_power=#{deviceTxPower,jdbcType=SMALLINT}</if>
+    <if test="productId != null ">and product_id=#{productId,jdbcType=BIGINT}</if>
+    <if test="deviceOnlineState != null ">and device_online_state=#{deviceOnlineState,jdbcType=TINYINT}</if>
+    <if test="deviceKey != null and deviceKey != ''">and device_key=#{deviceKey,jdbcType=VARCHAR}</if>
+    <if test="deviceTimezone != null ">and device_timezone=#{deviceTimezone,jdbcType=SMALLINT}</if>
+    <if test="deviceUpgradeState != null ">and device_upgrade_state=#{deviceUpgradeState,jdbcType=TINYINT}</if>
+    <if test="deviceSignalPower != null ">and device_signal_power=#{deviceSignalPower,jdbcType=SMALLINT}</if>
+    <if test="createBy != null and createBy != ''">and create_by=#{createBy,jdbcType=VARCHAR}</if>
+    <if test="deviceImei != null and deviceImei != ''">and device_imei=#{deviceImei,jdbcType=VARCHAR}</if>
+    <if test="deviceRegisterTime != null ">and device_register_time=#{deviceRegisterTime,jdbcType=TIMESTAMP}</if>
+    <if test="deviceHeartbeatCycle != null ">and device_heartbeat_cycle=#{deviceHeartbeatCycle,jdbcType=INTEGER}</if>
+    <if test="createTime != null ">and create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+    <if test="deviceSignalSnr != null ">and device_signal_snr=#{deviceSignalSnr,jdbcType=SMALLINT}</if>
+    <if test="deviceLinkQuality != null ">and device_link_quality=#{deviceLinkQuality,jdbcType=INTEGER}</if>
+    <if test="deviceModel != null and deviceModel != ''">and device_model=#{deviceModel,jdbcType=VARCHAR}</if>
+    <if test="deviceImsi != null and deviceImsi != ''">and device_imsi=#{deviceImsi,jdbcType=VARCHAR}</if>
+    <if test="createBy != null and createBy != ''">and create_by=#{createBy,jdbcType=VARCHAR}</if>
+    <if test="createTime != null ">and create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+    <if test="modifiedBy != null and modifiedBy != ''">and modified_by=#{modifiedBy,jdbcType=VARCHAR}</if>
+    <if test="modifiedTime != null ">and modified_time=#{modifiedTime,jdbcType=TIMESTAMP}</if>
+    <if test="remark != null and remark != ''">and remark=#{remark,jdbcType=VARCHAR}</if>
+    <if test="validState != null ">and valid_state=#{validState,jdbcType=TINYINT}</if>
+  </sql>
+
+  <sql id="select_page_condition_sql">
+    <if test="cm.modifiedTime != null ">and modified_time=#{cm.modifiedTime,jdbcType=TIMESTAMP}</if>
+    <if test="cm.deviceCurFmVersion != null and cm.deviceCurFmVersion != ''">and device_cur_fm_version=#{cm.deviceCurFmVersion,jdbcType=VARCHAR}</if>
+    <if test="cm.remark != null and cm.remark != ''">and remark=#{cm.remark,jdbcType=VARCHAR}</if>
+    <if test="cm.deviceParentId != null ">and device_parent_id=#{cm.deviceParentId,jdbcType=BIGINT}</if>
+    <if test="cm.deviceName != null and cm.deviceName != ''">and device_name=#{cm.deviceName,jdbcType=VARCHAR}</if>
+    <if test="cm.virtualDeviceFlag != null ">and virtual_device_flag=#{cm.virtualDeviceFlag,jdbcType=BOOLEAN}</if>
+    <if test="cm.deviceSignalIndicator != null ">and device_signal_indicator=#{cm.deviceSignalIndicator,jdbcType=INTEGER}</if>
+    <if test="cm.validState != null ">and valid_state=#{cm.validState,jdbcType=TINYINT}</if>
+    <if test="cm.deviceSignalPci != null ">and device_signal_pci=#{cm.deviceSignalPci,jdbcType=INTEGER}</if>
+    <if test="cm.lastCommunicateTime != null ">and last_communicate_time=#{cm.lastCommunicateTime,jdbcType=TIMESTAMP}</if>
+    <if test="cm.deviceRemoveTime != null ">and device_remove_time=#{cm.deviceRemoveTime,jdbcType=TIMESTAMP}</if>
+    <if test="cm.modifiedBy != null and cm.modifiedBy != ''">and modified_by=#{cm.modifiedBy,jdbcType=VARCHAR}</if>
+    <if test="cm.id != null ">and id=#{cm.id,jdbcType=BIGINT}</if>
+    <if test="cm.deviceCurHwVersion != null and cm.deviceCurHwVersion != ''">and device_cur_hw_version=#{cm.deviceCurHwVersion,jdbcType=VARCHAR}</if>
+    <if test="cm.deviceMacAddr != null and cm.deviceMacAddr != ''">and device_mac_addr=#{cm.deviceMacAddr,jdbcType=VARCHAR}</if>
+    <if test="cm.deviceCurSwVersion != null and cm.deviceCurSwVersion != ''">and device_cur_sw_version=#{cm.deviceCurSwVersion,jdbcType=VARCHAR}</if>
+    <if test="cm.deviceSignalEcl != null ">and device_signal_ecl=#{cm.deviceSignalEcl,jdbcType=TINYINT}</if>
+    <if test="cm.deviceUuid != null and cm.deviceUuid != ''">and device_uuid=#{cm.deviceUuid,jdbcType=VARCHAR}</if>
+    <if test="cm.deviceTxPower != null ">and device_tx_power=#{cm.deviceTxPower,jdbcType=SMALLINT}</if>
+    <if test="cm.productId != null ">and product_id=#{cm.productId,jdbcType=BIGINT}</if>
+    <if test="cm.deviceOnlineState != null ">and device_online_state=#{cm.deviceOnlineState,jdbcType=TINYINT}</if>
+    <if test="cm.deviceKey != null and cm.deviceKey != ''">and device_key=#{cm.deviceKey,jdbcType=VARCHAR}</if>
+    <if test="cm.deviceTimezone != null ">and device_timezone=#{cm.deviceTimezone,jdbcType=SMALLINT}</if>
+    <if test="cm.deviceUpgradeState != null ">and device_upgrade_state=#{cm.deviceUpgradeState,jdbcType=TINYINT}</if>
+    <if test="cm.deviceSignalPower != null ">and device_signal_power=#{cm.deviceSignalPower,jdbcType=SMALLINT}</if>
+    <if test="cm.createBy != null and cm.createBy != ''">and create_by=#{cm.createBy,jdbcType=VARCHAR}</if>
+    <if test="cm.deviceImei != null and cm.deviceImei != ''">and device_imei=#{cm.deviceImei,jdbcType=VARCHAR}</if>
+    <if test="cm.deviceRegisterTime != null ">and device_register_time=#{cm.deviceRegisterTime,jdbcType=TIMESTAMP}</if>
+    <if test="cm.deviceHeartbeatCycle != null ">and device_heartbeat_cycle=#{cm.deviceHeartbeatCycle,jdbcType=INTEGER}</if>
+    <if test="cm.createTime != null ">and create_time=#{cm.createTime,jdbcType=TIMESTAMP}</if>
+    <if test="cm.deviceSignalSnr != null ">and device_signal_snr=#{cm.deviceSignalSnr,jdbcType=SMALLINT}</if>
+    <if test="cm.deviceLinkQuality != null ">and device_link_quality=#{cm.deviceLinkQuality,jdbcType=INTEGER}</if>
+    <if test="cm.deviceModel != null and cm.deviceModel != ''">and device_model=#{cm.deviceModel,jdbcType=VARCHAR}</if>
+    <if test="cm.deviceImsi != null and cm.deviceImsi != ''">and device_imsi=#{cm.deviceImsi,jdbcType=VARCHAR}</if>
+    <if test="cm.createBy != null and cm.createBy != ''">and create_by=#{cm.createBy,jdbcType=VARCHAR}</if>
+    <if test="cm.createTime != null ">and create_time=#{cm.createTime,jdbcType=TIMESTAMP}</if>
+    <if test="cm.modifiedBy != null and modifiedBy != ''">and modified_by=#{cm.modifiedBy,jdbcType=VARCHAR}</if>
+    <if test="cm.modifiedTime != null ">and modified_time=#{cm.modifiedTime,jdbcType=TIMESTAMP}</if>
+    <if test="cm.remark != null and cm.remark != ''">and remark=#{cm.remark,jdbcType=VARCHAR}</if>
+    <if test="cm.validState != null ">and valid_state=#{cm.validState,jdbcType=TINYINT}</if>
+  </sql>
+
+  <sql id="insert_front_condition_sql">
+    <if test="modifiedTime != null ">modified_time,</if>
+    <if test="deviceCurFmVersion != null and deviceCurFmVersion != ''">device_cur_fm_version,</if>
+    <if test="remark != null and remark != ''">remark,</if>
+    <if test="deviceParentId != null ">device_parent_id,</if>
+    <if test="deviceName != null and deviceName != ''">device_name,</if>
+    <if test="virtualDeviceFlag != null ">virtual_device_flag,</if>
+    <if test="deviceSignalIndicator != null ">device_signal_indicator,</if>
+    <if test="validState != null ">valid_state,</if>
+    <if test="deviceSignalPci != null ">device_signal_pci,</if>
+    <if test="lastCommunicateTime != null ">last_communicate_time,</if>
+    <if test="deviceRemoveTime != null ">device_remove_time,</if>
+    <if test="modifiedBy != null and modifiedBy != ''">modified_by,</if>
+    <if test="id != null ">id,</if>
+    <if test="deviceCurHwVersion != null and deviceCurHwVersion != ''">device_cur_hw_version,</if>
+    <if test="deviceMacAddr != null and deviceMacAddr != ''">device_mac_addr,</if>
+    <if test="deviceCurSwVersion != null and deviceCurSwVersion != ''">device_cur_sw_version,</if>
+    <if test="deviceSignalEcl != null ">device_signal_ecl,</if>
+    <if test="deviceUuid != null and deviceUuid != ''">device_uuid,</if>
+    <if test="deviceTxPower != null ">device_tx_power,</if>
+    <if test="productId != null ">product_id,</if>
+    <if test="deviceOnlineState != null ">device_online_state,</if>
+    <if test="deviceKey != null and deviceKey != ''">device_key,</if>
+    <if test="deviceTimezone != null ">device_timezone,</if>
+    <if test="deviceUpgradeState != null ">device_upgrade_state,</if>
+    <if test="deviceSignalPower != null ">device_signal_power,</if>
+    <if test="createBy != null and createBy != ''">create_by,</if>
+    <if test="deviceImei != null and deviceImei != ''">device_imei,</if>
+    <if test="deviceRegisterTime != null ">device_register_time,</if>
+    <if test="deviceHeartbeatCycle != null ">device_heartbeat_cycle,</if>
+    <if test="createTime != null ">create_time,</if>
+    <if test="deviceSignalSnr != null ">device_signal_snr,</if>
+    <if test="deviceLinkQuality != null ">device_link_quality,</if>
+    <if test="deviceModel != null and deviceModel != ''">device_model,</if>
+    <if test="deviceImsi != null and deviceImsi != ''">device_imsi,</if>
+    <if test="createBy != null and createBy != ''">create_by,</if>
+    <if test="createTime != null ">create_time,</if>
+    <if test="modifiedBy != null and modifiedBy != ''">modified_by,</if>
+    <if test="modifiedTime != null ">modified_time,</if>
+    <if test="remark != null and remark != ''">remark,</if>
+    <if test="validState != null ">valid_state,</if>
+  </sql>
+
+  <sql id="insert_behind_condition_sql">
+    <if test="modifiedTime != null">#{modifiedTime,jdbcType=TIMESTAMP},</if>
+    <if test="deviceCurFmVersion != null and deviceCurFmVersion != ''">#{deviceCurFmVersion,jdbcType=VARCHAR},</if>
+    <if test="remark != null and remark != ''">#{remark,jdbcType=VARCHAR},</if>
+    <if test="deviceParentId != null">#{deviceParentId,jdbcType=BIGINT},</if>
+    <if test="deviceName != null and deviceName != ''">#{deviceName,jdbcType=VARCHAR},</if>
+    <if test="virtualDeviceFlag != null">#{virtualDeviceFlag,jdbcType=BOOLEAN},</if>
+    <if test="deviceSignalIndicator != null">#{deviceSignalIndicator,jdbcType=INTEGER},</if>
+    <if test="validState != null">#{validState,jdbcType=TINYINT},</if>
+    <if test="deviceSignalPci != null">#{deviceSignalPci,jdbcType=INTEGER},</if>
+    <if test="lastCommunicateTime != null">#{lastCommunicateTime,jdbcType=TIMESTAMP},</if>
+    <if test="deviceRemoveTime != null">#{deviceRemoveTime,jdbcType=TIMESTAMP},</if>
+    <if test="modifiedBy != null and modifiedBy != ''">#{modifiedBy,jdbcType=VARCHAR},</if>
+    <if test="id != null">#{id,jdbcType=BIGINT},</if>
+    <if test="deviceCurHwVersion != null and deviceCurHwVersion != ''">#{deviceCurHwVersion,jdbcType=VARCHAR},</if>
+    <if test="deviceMacAddr != null and deviceMacAddr != ''">#{deviceMacAddr,jdbcType=VARCHAR},</if>
+    <if test="deviceCurSwVersion != null and deviceCurSwVersion != ''">#{deviceCurSwVersion,jdbcType=VARCHAR},</if>
+    <if test="deviceSignalEcl != null">#{deviceSignalEcl,jdbcType=TINYINT},</if>
+    <if test="deviceUuid != null and deviceUuid != ''">#{deviceUuid,jdbcType=VARCHAR},</if>
+    <if test="deviceTxPower != null">#{deviceTxPower,jdbcType=SMALLINT},</if>
+    <if test="productId != null">#{productId,jdbcType=BIGINT},</if>
+    <if test="deviceOnlineState != null">#{deviceOnlineState,jdbcType=TINYINT},</if>
+    <if test="deviceKey != null and deviceKey != ''">#{deviceKey,jdbcType=VARCHAR},</if>
+    <if test="deviceTimezone != null">#{deviceTimezone,jdbcType=SMALLINT},</if>
+    <if test="deviceUpgradeState != null">#{deviceUpgradeState,jdbcType=TINYINT},</if>
+    <if test="deviceSignalPower != null">#{deviceSignalPower,jdbcType=SMALLINT},</if>
+    <if test="createBy != null and createBy != ''">#{createBy,jdbcType=VARCHAR},</if>
+    <if test="deviceImei != null and deviceImei != ''">#{deviceImei,jdbcType=VARCHAR},</if>
+    <if test="deviceRegisterTime != null">#{deviceRegisterTime,jdbcType=TIMESTAMP},</if>
+    <if test="deviceHeartbeatCycle != null">#{deviceHeartbeatCycle,jdbcType=INTEGER},</if>
+    <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+    <if test="deviceSignalSnr != null">#{deviceSignalSnr,jdbcType=SMALLINT},</if>
+    <if test="deviceLinkQuality != null">#{deviceLinkQuality,jdbcType=INTEGER},</if>
+    <if test="deviceModel != null and deviceModel != ''">#{deviceModel,jdbcType=VARCHAR},</if>
+    <if test="deviceImsi != null and deviceImsi != ''">#{deviceImsi,jdbcType=VARCHAR},</if>    <if test="createBy != null and createBy != ''">#{createBy,jdbcType=VARCHAR},</if>
+    <if test="createTime != null ">#{createTime,jdbcType=TIMESTAMP},</if>
+    <if test="modifiedBy != null and modifiedBy != ''">#{modifiedBy,jdbcType=VARCHAR},</if>
+    <if test="modifiedTime != null ">#{modifiedTime,jdbcType=TIMESTAMP},</if>
+    <if test="remark != null and remark != ''">#{remark,jdbcType=VARCHAR},</if>
+    <if test="validState != null ">#{validState,jdbcType=TINYINT},</if>
+  </sql>
+
+  <sql id="update_condition_sql">
+    <if test="modifiedTime != null ">modified_time=#{modifiedTime,jdbcType=TIMESTAMP},</if>
+    <if test="deviceCurFmVersion != null and deviceCurFmVersion != ''">device_cur_fm_version=#{deviceCurFmVersion,jdbcType=VARCHAR},</if>
+    <if test="remark != null and remark != ''">remark=#{remark,jdbcType=VARCHAR},</if>
+    <if test="deviceParentId != null ">device_parent_id=#{deviceParentId,jdbcType=BIGINT},</if>
+    <if test="deviceName != null and deviceName != ''">device_name=#{deviceName,jdbcType=VARCHAR},</if>
+    <if test="virtualDeviceFlag != null ">virtual_device_flag=#{virtualDeviceFlag,jdbcType=BOOLEAN},</if>
+    <if test="deviceSignalIndicator != null ">device_signal_indicator=#{deviceSignalIndicator,jdbcType=INTEGER},</if>
+    <if test="validState != null ">valid_state=#{validState,jdbcType=TINYINT},</if>
+    <if test="deviceSignalPci != null ">device_signal_pci=#{deviceSignalPci,jdbcType=INTEGER},</if>
+    <if test="lastCommunicateTime != null ">last_communicate_time=#{lastCommunicateTime,jdbcType=TIMESTAMP},</if>
+    <if test="deviceRemoveTime != null ">device_remove_time=#{deviceRemoveTime,jdbcType=TIMESTAMP},</if>
+    <if test="modifiedBy != null and modifiedBy != ''">modified_by=#{modifiedBy,jdbcType=VARCHAR},</if>
+    <if test="id != null ">id=#{id,jdbcType=BIGINT},</if>
+    <if test="deviceCurHwVersion != null and deviceCurHwVersion != ''">device_cur_hw_version=#{deviceCurHwVersion,jdbcType=VARCHAR},</if>
+    <if test="deviceMacAddr != null and deviceMacAddr != ''">device_mac_addr=#{deviceMacAddr,jdbcType=VARCHAR},</if>
+    <if test="deviceCurSwVersion != null and deviceCurSwVersion != ''">device_cur_sw_version=#{deviceCurSwVersion,jdbcType=VARCHAR},</if>
+    <if test="deviceSignalEcl != null ">device_signal_ecl=#{deviceSignalEcl,jdbcType=TINYINT},</if>
+    <if test="deviceUuid != null and deviceUuid != ''">device_uuid=#{deviceUuid,jdbcType=VARCHAR},</if>
+    <if test="deviceTxPower != null ">device_tx_power=#{deviceTxPower,jdbcType=SMALLINT},</if>
+    <if test="productId != null ">product_id=#{productId,jdbcType=BIGINT},</if>
+    <if test="deviceOnlineState != null ">device_online_state=#{deviceOnlineState,jdbcType=TINYINT},</if>
+    <if test="deviceKey != null and deviceKey != ''">device_key=#{deviceKey,jdbcType=VARCHAR},</if>
+    <if test="deviceTimezone != null ">device_timezone=#{deviceTimezone,jdbcType=SMALLINT},</if>
+    <if test="deviceUpgradeState != null ">device_upgrade_state=#{deviceUpgradeState,jdbcType=TINYINT},</if>
+    <if test="deviceSignalPower != null ">device_signal_power=#{deviceSignalPower,jdbcType=SMALLINT},</if>
+    <if test="createBy != null and createBy != ''">create_by=#{createBy,jdbcType=VARCHAR},</if>
+    <if test="deviceImei != null and deviceImei != ''">device_imei=#{deviceImei,jdbcType=VARCHAR},</if>
+    <if test="deviceRegisterTime != null ">device_register_time=#{deviceRegisterTime,jdbcType=TIMESTAMP},</if>
+    <if test="deviceHeartbeatCycle != null ">device_heartbeat_cycle=#{deviceHeartbeatCycle,jdbcType=INTEGER},</if>
+    <if test="createTime != null ">create_time=#{createTime,jdbcType=TIMESTAMP},</if>
+    <if test="deviceSignalSnr != null ">device_signal_snr=#{deviceSignalSnr,jdbcType=SMALLINT},</if>
+    <if test="deviceLinkQuality != null ">device_link_quality=#{deviceLinkQuality,jdbcType=INTEGER},</if>
+    <if test="deviceModel != null and deviceModel != ''">device_model=#{deviceModel,jdbcType=VARCHAR},</if>
+    <if test="deviceImsi != null and deviceImsi != ''">device_imsi=#{deviceImsi,jdbcType=VARCHAR},</if>    <if test="createBy != null and createBy != ''">create_by=#{createBy,jdbcType=VARCHAR},</if>
+    <if test="createTime != null ">create_time=#{createTime,jdbcType=TIMESTAMP},</if>
+    <if test="modifiedBy != null and modifiedBy != ''">modified_by=#{modifiedBy,jdbcType=VARCHAR},</if>
+    <if test="modifiedTime != null ">modified_time=#{modifiedTime,jdbcType=TIMESTAMP},</if>
+    <if test="remark != null and remark != ''">remark=#{remark,jdbcType=VARCHAR},</if>
+    <if test="validState != null ">valid_state=#{validState,jdbcType=TINYINT},</if>
+  </sql>
+  <insert id="insert" parameterType="Device">insert into
+    <include refid="table"/>
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="insert_front_condition_sql"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="insert_behind_condition_sql"/>
+    </trim>
+  </insert>
+  <update id="update" parameterType="Device">update
+    <include refid="table"/>
+    <trim prefix="set" suffixOverrides=",">
+      <include refid="update_condition_sql"/>
+    </trim>where id = #{id, jdbcType=BIGINT}
+  </update>
+  <delete id="deleteById" parameterType="java.lang.Long">update
+    <include refid="table"/>set valid_state = 0 where id = #{id, jdbcType=BIGINT}
+  </delete>
+  <select id="listPage" parameterType="java.util.Map" resultMap="DeviceMap">select * from
+    <include refid="table"/>
+    <where>
+      <include refid="select_condition_sql"/>
+    </where> order by id desc
+  </select>
+  <select id="listBy" parameterType="java.util.Map" resultMap="DeviceMap">select * from 
+    <include refid="table"/>
+    <where>
+      <include refid="select_condition_sql"/>
+    </where> order by id desc
+  </select>
+  <select id="getById" parameterType="java.lang.Long" resultMap="DeviceMap">select * from
+    <include refid="table"/>where id = #{id, jdbcType=BIGINT}
+  </select>
+</mapper>

@@ -12,7 +12,13 @@ import java.util.Set;
 public class mainClass{
 
     public static void main(String[] args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, IOException {
-        Class clazz = SysPara.class;
+       //想要生成mapper的类
+        Class clazz = Device.class;
+
+        //设置命名空间
+        String nameSpace = "cn.com.soyea.diotmp.sync.dao.primary.DeviceDao";
+
+        //
 
         Map map = ReflectMember.getClassMember(clazz);
         String userPath = System.getProperty("user.dir");
@@ -22,7 +28,7 @@ public class mainClass{
             file.delete();
         }
         OutputStream out = new FileOutputStream(file , true);
-        createBeginFile(out , clazz.getSimpleName());
+        createBeginFile(out , JavaToSqlName.classNameToSqlName(clazz.getSimpleName()) , nameSpace);
         createBaseMapper(out , clazz , map);
 
         createSelectConditionMapper(out , map , clazz);
@@ -34,13 +40,13 @@ public class mainClass{
         out.flush();
     }
 
-    public static void createBeginFile(OutputStream out , String className) throws IOException {
+    public static void createBeginFile(OutputStream out , String className , String nameSpace) throws IOException {
         out.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>".getBytes());
         out.write("\r\n".getBytes());
         out.write("<!DOCTYPE mapper PUBLIC \"-//mybatis.org//DTD Mapper 3.0//EN\" \"http://mybatis.org/dtd/mybatis-3-mapper.dtd\">".getBytes());
         out.write("\r\n".getBytes());
         out.write("\r\n".getBytes());
-        out.write(("<mapper namespace=\"cn.com.soyea.nb.rrmp.device.dao." + className +"Dao\">").getBytes());
+        out.write(("<mapper namespace=\""+nameSpace+ "\">").getBytes());
         out.write("\r\n".getBytes());
         out.write(("  <sql id=\"table\">"+className.toLowerCase() + "</sql>").getBytes());
         out.write("\r\n".getBytes());
@@ -99,12 +105,12 @@ public class mainClass{
 
 
         out.write("\r\n".getBytes());
-        out.write("    <if test=\"cm.createBy != null and createBy != ''\">and create_by=#{cm.createBy,jdbcType=VARCHAR}</if>\n".getBytes());
-        out.write("    <if test=\"cm.createTime != null \">and create_time=#{cm.createTime,jdbcType=TIMESTAMP}</if>\n".getBytes());
-        out.write("    <if test=\"cm.modifiedBy != null and modifiedBy != ''\">and modified_by=#{cm.modifiedBy,jdbcType=VARCHAR}</if>\n".getBytes());
-        out.write("    <if test=\"cm.modifiedTime != null \">and modified_time=#{cm.modifiedTime,jdbcType=TIMESTAMP}</if>\n".getBytes());
-        out.write("    <if test=\"cm.remark != null and remark != ''\">and remark=#{cm.remark,jdbcType=VARCHAR}</if>\n".getBytes());
-        out.write("    <if test=\"cm.validState != null \">and valid_state=#{cm.validState,jdbcType=TINYINT}</if>\n".getBytes());
+        out.write("    <if test=\"createBy != null and createBy != ''\">and create_by=#{createBy,jdbcType=VARCHAR}</if>\n".getBytes());
+        out.write("    <if test=\"createTime != null \">and create_time=#{createTime,jdbcType=TIMESTAMP}</if>\n".getBytes());
+        out.write("    <if test=\"modifiedBy != null and modifiedBy != ''\">and modified_by=#{modifiedBy,jdbcType=VARCHAR}</if>\n".getBytes());
+        out.write("    <if test=\"modifiedTime != null \">and modified_time=#{modifiedTime,jdbcType=TIMESTAMP}</if>\n".getBytes());
+        out.write("    <if test=\"remark != null and remark != ''\">and remark=#{remark,jdbcType=VARCHAR}</if>\n".getBytes());
+        out.write("    <if test=\"validState != null \">and valid_state=#{validState,jdbcType=TINYINT}</if>\n".getBytes());
         out.write("  </sql>\n".getBytes());
     }
 
